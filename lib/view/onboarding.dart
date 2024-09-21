@@ -4,10 +4,8 @@ import 'package:todolists/view/onboarding1.dart';
 import 'package:todolists/view/onboarding2.dart';
 import 'package:todolists/view/onboarding3.dart';
 import 'package:todolists/viewmodel/vm_onboarding.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoarding extends StatelessWidget {
-  // const OnBoarding ({super.key});
 
   Skip buttonText = Skip(0);
  PageController pageController = PageController();
@@ -65,8 +63,6 @@ class OnBoarding extends StatelessWidget {
 
         ))
       ])
-      // Center(child: Text('Home Home Home Home Home Home Home'),)
-      ,)
-      ;
+      ,);
   }
 }

@@ -2,25 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:todolists/main.dart';
 import 'package:todolists/providers/listprovider.dart';
 import 'package:provider/provider.dart';
-import 'package:todolists/viewmodel/vm_listdetails.dart';
 
 
 
 class Listedit extends StatelessWidget {
-  // const Listdetails({super.key});
-
-  // myController.value = TextEditingValue(text: '');
-  // final myController3 = TextEditingController();
-  // MiniCard miniCard = MiniCard('','');
-  // List hoz = [];
-  // void dispose() {
-  //   // Clean up the controller when the widget is disposed.
-  //   myController.dispose();
-  //   myController2.dispose();
-  //   // myController3.dispose();
-  //   // super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
 
@@ -97,21 +82,11 @@ class Listedit extends StatelessWidget {
                     // print('getCard1 is');
                     // print();
                     Navigator.pushReplacementNamed(context, '/home');
-
-                    // print ('con1 ${myController.text} &&& con2 ${myController2.text}');
-                    // print (context.watch<listProvider>().myController2);
-                    // hoz.add(MiniCard(myController.text,myController2.text));
-                    //  print();
-                    // Provider.of<listProvider>(context, listen: false).editTitle(myController.text, myController2.text);
                     Navigator.pushReplacementNamed(context, '/home');
 
                   },
-                    // style:
-                    // child: Text('Click me!'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor:Colors.redAccent ,
-                      // primary: Colors.red, // لون الخلفية
-                      // onPrimary: Colors.white, // لون النص
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10), // شكل الزر
                       ),
@@ -131,20 +106,12 @@ class Listedit extends StatelessWidget {
                     //
                   ),
                   ElevatedButton.icon(onPressed: (){
-                    // print ('con1 ${myController.text} &&& con2 ${myController2.text}');
-                    // print (context.watch<listProvider>().myController2);
-                    // hoz.add(MiniCard(myController.text,myController2.text));
-                    //  print();
                     Provider.of<listProvider>(context, listen: false).deleteTitle();
                     Navigator.pushReplacementNamed(context, '/home');
 
                   },
-                    // style:
-                    // child: Text('Click me!'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor:Colors.redAccent ,
-                      // primary: Colors.red, // لون الخلفية
-                      // onPrimary: Colors.white, // لون النص
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10), // شكل الزر
                       ),
@@ -174,7 +141,6 @@ class Listedit extends StatelessWidget {
 
       ),
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
     //
   }

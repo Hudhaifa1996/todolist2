@@ -2,23 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:todolists/main.dart';
 import 'package:todolists/providers/listprovider.dart';
 import 'package:provider/provider.dart';
-import 'package:todolists/viewmodel/vm_listdetails.dart';
 
 
 
 class Listdetails extends StatelessWidget {
-  // const Listdetails({super.key});
   final myController = TextEditingController();
   final myController2 = TextEditingController();
-  // final myController3 = TextEditingController();
-  // MiniCard miniCard = MiniCard('','');
-  // List hoz = [];
   void dispose() {
-    // Clean up the controller when the widget is disposed.
     myController.dispose();
     myController2.dispose();
-    // myController3.dispose();
-    // super.dispose();
   }
 
   @override
@@ -87,22 +79,14 @@ class Listdetails extends StatelessWidget {
                 height: 100,
               ),
 ElevatedButton.icon(onPressed: (){
-  // print ('con1 ${myController.text} &&& con2 ${myController2.text}');
-  // print (context.watch<listProvider>().myController2);
- // hoz.add(MiniCard(myController.text,myController2.text));
- //  print();
   Provider.of<listProvider>(context, listen: false).saveTitle(myController.text, myController2.text);
   Navigator.pushReplacementNamed(context, '/home');
 
   },
-  // style:
-  // child: Text('Click me!'),
   style: ElevatedButton.styleFrom(
     backgroundColor:Colors.redAccent ,
-    // primary: Colors.red, // لون الخلفية
-    // onPrimary: Colors.white, // لون النص
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10), // شكل الزر
+      borderRadius: BorderRadius.circular(10),
     ),
   ),
   icon: Icon(Icons.save,

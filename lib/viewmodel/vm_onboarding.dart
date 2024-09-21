@@ -1,5 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:todolists/view/splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Skip
@@ -21,10 +19,8 @@ buttonText2 = 'next';}
     }
 void Prefs() async
 {
-    // SharedPreferences.setMockInitialValues({});
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('repeat', false);
-    // print(prefs.getBool('repeat'));
 }
 
 
