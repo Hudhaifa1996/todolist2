@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:dynamic_shared_preferences/dynamic_shared_preferences.dart';
 import 'package:todolists/viewmodel/vm_home.dart';
 import 'package:todolists/viewmodel/vm_splash.dart';
 import 'dart:convert';
@@ -13,8 +12,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // import 'package:todolists/viewmodel/vm_listdetails.dart';
 class listProvider extends ChangeNotifier {
+  List<int> randomColor = [];
   List<String>? miniCard1 = [];
-
   List<String>? miniCard2 = [];
   // print('mimicars is $miniCard2');
   String _title = "";

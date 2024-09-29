@@ -9,19 +9,19 @@ import 'view/listedit.dart';
 import 'viewmodel/vm_home.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'viewmodel/vm_home2.dart';
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  runApp(MultiProvider(
-    providers: [ChangeNotifierProvider(create: (context) => listProvider())],
+  runApp(ChangeNotifierProvider(create: (context) => listProvider(),
     child: MaterialApp(
       debugShowCheckedModeBanner: false,
       // home: Home(),
       routes: {
-        '/': (context) => Splash(prefs: prefs),
-        '/onboarding': (context) => OnBoarding(),
-        '/home': (context) => VmHome(),
+        '/': (context) => SplashScreen(prefs: prefs),
+        '/onboarding': (context) => OnBoarding(prefs: prefs),
+        '/home': (context) => Home(prefs: prefs),
         '/listdetails': (context) => Listdetails(),
         '/listedit': (context) => Listedit(),
 
