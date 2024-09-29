@@ -7,8 +7,8 @@ import 'package:todolists/routing.dart';
 class OnBoarding extends StatelessWidget {
   OnBoarding({super.key});
 
-  Skip buttonText = Skip(0);
-  PageController pageController = PageController();
+  static SkipNext buttonText = SkipNext(0);
+  final PageController pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class OnBoarding extends StatelessWidget {
           controller: pageController,
 
           onPageChanged: (index) {
-            buttonText = Skip(index);
+            buttonText = SkipNext(index);
             (context as Element).markNeedsBuild();
           },
           // children: [
@@ -65,7 +65,7 @@ class OnBoarding extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Prefs(Routing.prefs);
+                    onBoardingSkip(Routing.prefs);
                     context.go('/home');
                   },
                   child: Text(

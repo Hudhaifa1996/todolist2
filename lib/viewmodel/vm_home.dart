@@ -16,19 +16,19 @@ class VmHome {
       }
       Provider.of<ListProvider>(context, listen: false).randomColor =
           randomColor;
-      _loadList(context);
+      loadList(context);
     }
-    _SaveList(context);
+    saveList(context);
   }
 
-  void _loadList(context) {
+  void loadList(context) {
     List<String>? min = Routing.prefs.getStringList('title');
     List<String>? min2 = Routing.prefs.getStringList('description');
     Provider.of<ListProvider>(context, listen: false).miniCard1 = min!;
     Provider.of<ListProvider>(context, listen: false).miniCard2 = min2!;
   }
 
-  void _SaveList(context) {
+  void saveList(context) {
     Routing.prefs.setStringList(
         'title', Provider.of<ListProvider>(context, listen: false).miniCard1!);
     Routing.prefs.setStringList('description',

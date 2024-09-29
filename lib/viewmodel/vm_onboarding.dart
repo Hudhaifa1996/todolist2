@@ -16,12 +16,12 @@ List<String> textList = [
   'You can delete completed points from your daily list'
 ];
 
-class Skip {
+class SkipNext {
   String buttonText = "skip";
   String buttonText2 = "next";
   int index = 0;
 
-  Skip(index) {
+  SkipNext(index) {
     if (index == 2) {
       buttonText = 'finish';
       buttonText2 = '          ';
@@ -32,6 +32,6 @@ class Skip {
   }
 }
 
-void Prefs(SharedPreferences prefs) {
+void onBoardingSkip(SharedPreferences prefs) {
   prefs.setBool('repeat', false);
 }

@@ -4,13 +4,13 @@ import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomButtons extends StatelessWidget {
-  late final myController;
-  late final myController2;
+   final TextEditingController myController;
+   final TextEditingController myController2;
 
-  CustomButtons(
+  const CustomButtons(
       {super.key, required this.myController, required this.myController2});
 
-  late int buttonsNo;
+    static late int buttonsNo;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class CustomButtons extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.redAccent,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10), // شكل الزر
+                borderRadius: BorderRadius.circular(10),
               ),
             ),
             icon: const Icon(
@@ -58,7 +58,7 @@ class CustomButtons extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.redAccent,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10), // شكل الزر
+                borderRadius: BorderRadius.circular(10),
               ),
             ),
             icon: const Icon(
