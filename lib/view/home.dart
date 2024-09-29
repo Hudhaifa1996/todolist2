@@ -2,22 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todolists/providers/listprovider.dart';
 import 'package:todolists/viewmodel/vm_home.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:go_router/go_router.dart';
+import 'package:collection/collection.dart';
 
 class Home extends StatelessWidget {
-  final SharedPreferences prefs;
-
-  const Home({super.key, required this.prefs});
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-    VmHome(prefs, context);
+    VmHome(context);
     List<int> randomColor =
-        Provider.of<listProvider>(context, listen: false).randomColor;
+        Provider.of<ListProvider>(context, listen: false).randomColor;
     List<String>? miniCard1 =
-        Provider.of<listProvider>(context, listen: false).getCard1;
+        Provider.of<ListProvider>(context, listen: false).getCard1;
     List<String>? miniCard2 =
-        Provider.of<listProvider>(context, listen: false).getCard2;
+        Provider.of<ListProvider>(context, listen: false).getCard2;
 
     return Scaffold(
       body: SafeArea(
@@ -25,18 +24,18 @@ class Home extends StatelessWidget {
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              ...miniCard1!.map((item) => GestureDetector(
+              ...miniCard1!.mapIndexed((index, item) => GestureDetector(
                     onTap: () {
-                      Provider.of<listProvider>(context, listen: false).buttonsNo = 0;
-                      Provider.of<listProvider>(context, listen: false).index =
-                          miniCard1.indexOf(item);
+                      Provider.of<ListProvider>(context, listen: false)
+                          .buttonsNo = 0;
+                      Provider.of<ListProvider>(context, listen: false).index =
+                          index;
 
-                      Navigator.pushNamed(context, '/listedit');
+                      context.go('/listedit');
                     },
                     child: Card(
                         child: Container(
-                      color: Color(randomColor[miniCard1.indexOf(item)])
-                          .withOpacity(0.5),
+                      color: Color(randomColor[index]).withOpacity(0.5),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
@@ -51,7 +50,7 @@ class Home extends StatelessWidget {
                             height: 10,
                           ),
                           Text(
-                            miniCard2![miniCard1.indexOf(item)].toString(),
+                            miniCard2![index].toString(),
                             style: const TextStyle(
                               fontSize: 16,
                             ),
@@ -67,9 +66,8 @@ class Home extends StatelessWidget {
       )),
       floatingActionButton: FloatingActionButton.large(
         onPressed: () {
-
-          Provider.of<listProvider>(context, listen: false).buttonsNo = 1;
-          Navigator.pushNamed(context, '/listedit');
+          Provider.of<ListProvider>(context, listen: false).buttonsNo = 1;
+          context.go('/listedit');
         },
         shape: const CircleBorder(),
         backgroundColor: Colors.redAccent,

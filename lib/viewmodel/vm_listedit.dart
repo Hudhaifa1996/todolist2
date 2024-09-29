@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:todolists/providers/listprovider.dart';
-import 'package:todolists/view/listedit.dart';
 import 'package:provider/provider.dart';
-
+import 'package:go_router/go_router.dart';
 
 class CustomButtons extends StatelessWidget {
   late final myController;
   late final myController2;
-  CustomButtons({super.key, required this.myController, required this.myController2});
+
+  CustomButtons(
+      {super.key, required this.myController, required this.myController2});
 
   late int buttonsNo;
-  @override
 
+  @override
   Widget build(BuildContext context) {
-    buttonsNo = Provider.of<listProvider>(context, listen: false).buttonsNo;
+    buttonsNo = Provider.of<ListProvider>(context, listen: false).buttonsNo;
 
     if (buttonsNo == 0) {
       return Row(
@@ -21,12 +22,12 @@ class CustomButtons extends StatelessWidget {
         children: [
           ElevatedButton.icon(
             onPressed: () {
-              Provider.of<listProvider>(context, listen: false)
+              Provider.of<ListProvider>(context, listen: false)
                   .editTitle(myController.text, myController2.text);
               // print('getCard1 is');
               // print();
-              Navigator.pushReplacementNamed(context, '/home');
-              Navigator.pushReplacementNamed(context, '/home');
+              context.go('/home');
+              context.go('/home');
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.redAccent,
@@ -51,8 +52,8 @@ class CustomButtons extends StatelessWidget {
           ),
           ElevatedButton.icon(
             onPressed: () {
-              Provider.of<listProvider>(context, listen: false).deleteTitle();
-              Navigator.pushReplacementNamed(context, '/home');
+              Provider.of<ListProvider>(context, listen: false).deleteTitle();
+              context.go('/home');
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.redAccent,
@@ -80,9 +81,9 @@ class CustomButtons extends StatelessWidget {
     } else {
       return ElevatedButton.icon(
         onPressed: () {
-          Provider.of<listProvider>(context, listen: false)
+          Provider.of<ListProvider>(context, listen: false)
               .saveTitle(myController.text, myController2.text);
-          Navigator.pushReplacementNamed(context, '/home');
+          context.go('/home');
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.redAccent,
