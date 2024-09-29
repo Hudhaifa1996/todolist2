@@ -1,60 +1,37 @@
-// import 'package:flutter/material.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:provider/provider.dart';
-// import 'package:todolists/providers/listprovider.dart';
-// import 'package:todolists/view/home.dart';
-// import 'dart:convert';
-// import 'dart:math' as math;
-//
-// List<int> randomColor = [];
-// int _n = 0;
-//
-// class VmHome extends StatefulWidget {
-//   const VmHome({super.key});
-//
-//   @override
-//   State<VmHome> createState() => _VmHomeState();
-// }
-//
-// class _VmHomeState extends State<VmHome> {
-//   @override
-//   void initState() {
-//     super.initState();
-//
-//     _loadList();
-//     _SaveList();
-//   }
-//
-//   Future<void> _loadList() async {
-//     final prefs = await SharedPreferences.getInstance();
-//     setState(() {
-//       if (_n == 0) {
-//         _n = 1;
-//         List<String>? min = prefs.getStringList('title');
-//         List<String>? min2 = prefs.getStringList('description');
-//         for (var i = 0; i < 10; i++) {
-//           randomColor.add((math.Random().nextDouble() * 0xFFFFFF).toInt());
-//         }
-//
-//         Provider.of<listProvider>(context, listen: false).miniCard1 = min!;
-//         Provider.of<listProvider>(context, listen: false).miniCard2 = min2!;
-//       }
-//     });
-//   }
-//
-//   Future<void> _SaveList() async {
-//     final prefs = await SharedPreferences.getInstance();
-//
-//     setState(() {
-//       prefs.setStringList('title',
-//           Provider.of<listProvider>(context, listen: false).miniCard1!);
-//       prefs.setStringList('description',
-//           Provider.of<listProvider>(context, listen: false).miniCard2!);
-//     });
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Home();
-//   }
-// }
+import 'package:provider/provider.dart';
+import 'package:todolists/providers/listprovider.dart';
+import 'dart:math' as math;
+import "package:todolists/routing.dart";
+
+int _n = 0;
+
+class VmHome {
+  List<int> randomColor = [];
+
+  VmHome(context) {
+    if (_n == 0) {
+      _n = 1;
+      for (var i = 0; i < 100; i++) {
+        randomColor.add((math.Random().nextDouble() * 0xFFFFFF).toInt());
+      }
+      Provider.of<ListProvider>(context, listen: false).randomColor =
+          randomColor;
+      _loadList(context);
+    }
+    _SaveList(context);
+  }
+
+  void _loadList(context) {
+    List<String>? min = Routing.prefs.getStringList('title');
+    List<String>? min2 = Routing.prefs.getStringList('description');
+    Provider.of<ListProvider>(context, listen: false).miniCard1 = min!;
+    Provider.of<ListProvider>(context, listen: false).miniCard2 = min2!;
+  }
+
+  void _SaveList(context) {
+    Routing.prefs.setStringList(
+        'title', Provider.of<ListProvider>(context, listen: false).miniCard1!);
+    Routing.prefs.setStringList('description',
+        Provider.of<ListProvider>(context, listen: false).miniCard2!);
+  }
+}

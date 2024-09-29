@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:todolists/viewmodel/vm_onboarding.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:go_router/go_router.dart';
+import 'package:todolists/routing.dart';
 
 class OnBoarding extends StatelessWidget {
-  final SharedPreferences prefs;
-
-  OnBoarding({super.key, required this.prefs});
+  OnBoarding({super.key});
 
   Skip buttonText = Skip(0);
-  String insertedImage = '', insertedTitle = '', insertedText = '';
   PageController pageController = PageController();
 
   @override
@@ -61,14 +59,14 @@ class OnBoarding extends StatelessWidget {
           // ],
         ),
         Container(
-            alignment: Alignment(0, 0.8),
+            alignment: const Alignment(0, 0.8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 GestureDetector(
                   onTap: () {
-                    Prefs(prefs);
-                    Navigator.pushReplacementNamed(context, '/home');
+                    Prefs(Routing.prefs);
+                    context.go('/home');
                   },
                   child: Text(
                     buttonText.buttonText,
