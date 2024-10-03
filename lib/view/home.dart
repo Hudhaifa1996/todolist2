@@ -11,8 +11,6 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     VmHome(context);
-    List<int> randomColor =
-        Provider.of<ListProvider>(context, listen: false).randomColor;
     List<String>? miniCard1 =
         Provider.of<ListProvider>(context, listen: false).getCard1;
     List<String>? miniCard2 =
@@ -35,7 +33,7 @@ class Home extends StatelessWidget {
                     },
                     child: Card(
                         child: Container(
-                      color: Color(randomColor[index]).withOpacity(0.5),
+                      color: Color(Provider.of<ListProvider>(context, listen: false).randomColor[index]).withOpacity(0.5),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [

@@ -20,7 +20,7 @@ class Routing {
       GoRoute(
         name: 'onboarding',
         path: '/onboarding',
-        builder: (context, state) => OnBoarding(),
+        builder: (context, state) =>  OnBoarding(),
       ),
       GoRoute(
         name: 'home',
