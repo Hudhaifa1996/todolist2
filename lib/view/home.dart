@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:todolists/providers/listprovider.dart';
 import 'package:todolists/viewmodel/vm_home.dart';
 import 'package:go_router/go_router.dart';
-import 'package:collection/collection.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -11,60 +10,61 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     VmHome(context);
-    List<String>? miniCard1 =
-        Provider.of<ListProvider>(context, listen: false).getCard1;
-    List<String>? miniCard2 =
-        Provider.of<ListProvider>(context, listen: false).getCard2;
-
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              ...miniCard1!.mapIndexed((index, item) => GestureDetector(
-                    onTap: () {
-                      Provider.of<ListProvider>(context, listen: false)
-                          .buttonsNo = 0;
-                      Provider.of<ListProvider>(context, listen: false).index =
-                          index;
+              ...Provider.of<ListProvider>(context, listen: false).getTitles.indexed.map(((int, dynamic) item) {
+                final (index, value) = item;
+                return GestureDetector(
+                  onTap: () {
+                    Provider.of<ListProvider>(context, listen: false)
+                        .isOneButton = false;
+                    Provider.of<ListProvider>(context, listen: false).index =
+                        index;
 
-                      context.go('/listedit');
-                    },
-                    child: Card(
-                        child: Container(
-                      color: Color(Provider.of<ListProvider>(context, listen: false).randomColor[index]).withOpacity(0.5),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text(
-                            item,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                            ),
+                    context.go('/listedit');
+                  },
+                  child: Card(
+                      child: Container(
+                    color: Color(
+                            Provider.of<ListProvider>(context, listen: false)
+                                .randomColor[index])
+                        .withOpacity(0.5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          value.toString(),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
                           ),
-                          const SizedBox(
-                            height: 10,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          Provider.of<ListProvider>(context, listen: false).getDescriptions[index].toString(),
+                          style: const TextStyle(
+                            fontSize: 16,
                           ),
-                          Text(
-                            miniCard2![index].toString(),
-                            style: const TextStyle(
-                              fontSize: 16,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          )
-                        ],
-                      ),
-                    )),
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        )
+                      ],
+                    ),
                   )),
+                );
+              }),
             ]),
       )),
       floatingActionButton: FloatingActionButton.large(
         onPressed: () {
-          Provider.of<ListProvider>(context, listen: false).buttonsNo = 1;
+          Provider.of<ListProvider>(context, listen: false).isOneButton = true;
           context.go('/listedit');
         },
         shape: const CircleBorder(),

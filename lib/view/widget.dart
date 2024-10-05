@@ -10,13 +10,10 @@ class CustomButtons extends StatelessWidget {
   const CustomButtons(
       {super.key, required this.myController, required this.myController2});
 
-    static late int buttonsNo;
-
   @override
   Widget build(BuildContext context) {
-    buttonsNo = Provider.of<ListProvider>(context, listen: false).buttonsNo;
 
-    if (buttonsNo == 0) {
+    if (Provider.of<ListProvider>(context, listen: false).isOneButton == false) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
