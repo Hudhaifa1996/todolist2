@@ -34,9 +34,8 @@ class VmHome {
       for (var i = 0; i < 100; i++) {
         randomColor.add((math.Random().nextDouble() * 0xFFFFFF).toInt());
       }
-      Provider.of<ListProvider>(context, listen: false).randomColor =
-          randomColor;
-      fetchData(context);
+      Provider.of<ListProvider>(context, listen: false).setRandomColor(randomColor);
+
       _isFetched = false;
     }
     saveData(context);
@@ -59,10 +58,10 @@ class VmHome {
             .decode(base64.decode(json.decode(titleResponse.body)['content'])));
         descriptionData = jsonDecode(utf8.decode(
             base64.decode(json.decode(descriptionResponse.body)['content'])));
-        (context as Element).markNeedsBuild();
-        Provider.of<ListProvider>(context, listen: false).titles = titleData;
-        Provider.of<ListProvider>(context, listen: false).descriptions =
-            descriptionData;
+        // (context as Element).markNeedsBuild();
+        Provider.of<ListProvider>(context, listen: false).setTitles(titleData);
+        Provider.of<ListProvider>(context, listen: false).setDescriptions(descriptionData);
+
         print('Load success');
       } else {
         throw Exception('Failed to load data');

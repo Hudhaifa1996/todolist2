@@ -3,20 +3,35 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:todolists/viewmodel/vm_splash.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todolists/routing.dart';
+import 'package:todolists/viewmodel/vm_home.dart';
+import 'package:flutter/scheduler.dart';
 
 class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+   SplashScreen({super.key});
+
+   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+      // key: myGlobals.scaffoldKey,
+      key: _scaffoldKey,
+
       body: FutureBuilder(
-          future: getNextRoute(Routing.prefs),
+          future: Future.wait ([getNextRoute(Routing.prefs), VmHome(context).fetchData(context)]),
           initialData: 'wait',
-          builder: (context, AsyncSnapshot<String> data) {
-            if (data.connectionState == ConnectionState.done) {
+          builder: ( context, AsyncSnapshot<dynamic> snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                context.go('${data.data}');
+                // print(snapshot);
+                // Navigator.of(context2).pop();
+                Future.delayed(const Duration(milliseconds: 300));
+                GoRouter.of(context).go('${snapshot.data[0]}');
+
+                // GoRouter.of(context)
+
+                // context.go('${snapshot.data[0]}');
               });
             }
             return const Center(

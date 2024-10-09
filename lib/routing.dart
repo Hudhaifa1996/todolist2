@@ -15,7 +15,7 @@ class Routing {
       GoRoute(
         name: 'splash',
         path: '/',
-        builder: (context, state) => const SplashScreen(),
+        builder: (context, state) =>  SplashScreen(),
       ),
       GoRoute(
         name: 'onboarding',
@@ -25,7 +25,7 @@ class Routing {
       GoRoute(
         name: 'home',
         path: '/home',
-        builder: (context, state) => const Home(),
+        builder: (context, state) =>  Home(),
       ),
       GoRoute(
         name: 'listedit',

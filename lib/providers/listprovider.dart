@@ -4,31 +4,44 @@ class ListProvider extends ChangeNotifier {
   late bool isOneButton;
   late TextEditingController myController;
   late TextEditingController myController2;
-  List<int> randomColor = [];
-  List<dynamic> titles = [];
-  List<dynamic> descriptions = [];
+  List<int> _randomColor = [];
+  List<dynamic> _titles = [];
+  List<dynamic> _descriptions = [];
 
   int index = 0;
+  void setRandomColor(List<int> randomColor) {
+    _randomColor = randomColor;
+    // notifyListeners();
+  }
+  void setTitles(List<dynamic> titles) {
+    _titles = titles;
+    notifyListeners();
+  }
+  void setDescriptions(List<dynamic> descriptions) {
+    _descriptions = descriptions;
+    notifyListeners();
+  }
+  List<int> get getRandomColor => _randomColor;
 
-  List<dynamic> get getTitles => titles;
+  List<dynamic> get getTitles => _titles;
 
-  List<dynamic> get getDescriptions => descriptions;
+  List<dynamic> get getDescriptions => _descriptions;
 
   saveTitle(String title, String description) {
-    titles.add(title);
-    descriptions.add(description);
+    _titles.add(title);
+    _descriptions.add(description);
     notifyListeners();
   }
 
   editTitle(String title, String description) {
-    titles[index] = title;
-    descriptions[index] = description;
+    _titles[index] = title;
+    _descriptions[index] = description;
     notifyListeners();
   }
 
   deleteTitle() {
-    titles.removeAt(index);
-    descriptions.removeAt(index);
+    _titles.removeAt(index);
+    _descriptions.removeAt(index);
     notifyListeners();
   }
 }
