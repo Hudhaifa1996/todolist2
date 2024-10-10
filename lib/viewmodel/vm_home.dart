@@ -45,12 +45,11 @@ class VmHome {
     try {
       final titleResponse = await http.get(
           Uri.parse(
-              'https://gitlab.com/api/v4/projects/62245073/repository/files/Hudhaifa%2Ftitle%2Etxt?ref=main'),
-          headers: requestHeaders);
+              'https://dummyjson.com/todos'));
+      print(titleResponse);
       final descriptionResponse = await http.get(
           Uri.parse(
-              'https://gitlab.com/api/v4/projects/62245073/repository/files/Hudhaifa%2Fdescription%2Etxt?ref=main'),
-          headers: requestHeaders);
+              'https://dummyjson.com/todos'));
 
       if (titleResponse.statusCode == 200 &&
           descriptionResponse.statusCode == 200) {
