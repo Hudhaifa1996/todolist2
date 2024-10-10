@@ -15,11 +15,11 @@ class ListProvider extends ChangeNotifier {
   }
   void setTitles(List<dynamic> titles) {
     _titles = titles;
-    notifyListeners();
+    // notifyListeners();
   }
   void setDescriptions(List<dynamic> descriptions) {
     _descriptions = descriptions;
-    notifyListeners();
+    // notifyListeners();
   }
   List<int> get getRandomColor => _randomColor;
 

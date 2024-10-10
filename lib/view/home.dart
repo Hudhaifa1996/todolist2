@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todolists/API/API.dart';
 import 'package:todolists/providers/listprovider.dart';
 import 'package:todolists/viewmodel/vm_home.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:todolists/API/API.dart';
 class Home extends StatelessWidget {
    Home({super.key});
-  final listProvider = ListProvider();
 
   @override
   Widget build(BuildContext context) {
-    // var listProvider = context.read<ListProvider>();
-    VmHome(context);
+    API().fetchData();
+    API().saveData();
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
-        child: Consumer<ListProvider>(
-          builder: (context, listProvider, child) => Column(
+        child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                ...listProvider.getTitles.indexed.map(((int, dynamic) item) {
+                ...context.read<ListProvider>().getTitles.indexed.map(((int, dynamic) item) {
                   final (index, value) = item;
                   return GestureDetector(
                     onTap: () {
-                      listProvider
+                      context.read<ListProvider>()
                           .isOneButton = false;
-                      listProvider.index =
+                      context.read<ListProvider>().index =
                           index;
 
                       context.go('/listedit');
@@ -33,7 +32,7 @@ class Home extends StatelessWidget {
                     child: Card(
                         child: Container(
                       color: Color(
-                          listProvider
+                          context.read<ListProvider>()
                                   .getRandomColor[index])
                           .withOpacity(0.5),
                       child: Column(
@@ -50,7 +49,7 @@ class Home extends StatelessWidget {
                             height: 10,
                           ),
                           Text(
-                            listProvider.getDescriptions[index]!.toString(),
+                            context.read<ListProvider>().getDescriptions[index]!.toString(),
                             style: const TextStyle(
                               fontSize: 16,
                             ),
@@ -65,7 +64,7 @@ class Home extends StatelessWidget {
                 }),
               ]),
         ),
-      )),
+      ),
       floatingActionButton: FloatingActionButton.large(
         onPressed: () {
           Provider.of<ListProvider>(context, listen: false).isOneButton = true;

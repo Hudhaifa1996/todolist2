@@ -10,7 +10,7 @@ class Routing {
 
 // GoRouter configuration
   static final router = GoRouter(
-    initialLocation: '/',
+    initialLocation: '/home',
     routes: [
       GoRoute(
         name: 'splash',
